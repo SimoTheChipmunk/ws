@@ -1,6 +1,7 @@
 package com.example.weatherstation.domain
 
-import kotlin.time.Instant
+import java.time.Instant
+
 
 enum class MeasurementType(val unit: String, internal val column: String) {
     TEMPERATURE("°C", "temperature_c"),
