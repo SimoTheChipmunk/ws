@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: weather-station
+  threads:
+    virtual:
+      enabled: true
+  http:
+    serviceclient:
+      meteo-forecast:
+        base-url: https://api.open-meteo.com
+        connect-timeout: 2s
+        read-timeout: 10s
+      meteo-archive:
+        base-url: https://archive-api.open-meteo.com
+        connect-timeout: 2s
+        read-timeout: 30s
+
+server:
+  shutdown: graceful
+  error:
+    include-message: never
+    include-stacktrace: never
+    include-binding-errors: never
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: never
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+
+weather:
+  ingestion:
+    max-range-days: 366
+  security:
+    write-api-key: ${WEATHER_STATION_WRITE_API_KEY}  # REQUIRED; app write-auth key only, never sent upstream

@@ -1,0 +1,3 @@
+weather:
+  security:
+    write-api-key: test-key
